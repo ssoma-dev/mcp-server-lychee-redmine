@@ -33,7 +33,9 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.0.4",
     "axios": "^1.7.9",
-    "zod": "^3.25.1"
+    "yaml": "^2.8.2",
+    "zod": "^3.25.1",
+    "zod-to-json-schema": "^3.25.1"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",

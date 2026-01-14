@@ -48,7 +48,7 @@ Lychee Redmine MCP Serverの実装タスクです。TypeScript + Node.js 20+で�
   - Zodスキーマによるバリデーション実装
   - _Requirements: 2.3, 10.3, 10.5_
 
-- [ ] 3.2 設定ローダーの実装
+- [x] 3.2 設定ローダーの実装
   - 環境変数からの設定読み込み（優先度高）
   - 設定ファイル（JSON/YAML）からの読み込み（オプション、フォールバック）
   - デフォルト値の提供（logLevel: 'INFO', timeout: 30000, retryMaxAttempts: 3）
@@ -57,14 +57,14 @@ Lychee Redmine MCP Serverの実装タスクです。TypeScript + Node.js 20+で�
   - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5_
 
 - [ ] 4. Redmine API統合とデータモデル
-- [ ] 4.1 (P) Redmine型定義の作成
+- [x] 4.1 (P) Redmine型定義の作成
   - Project、Issue、User、Member、Milestone、Scheduleなどのエンティティ型定義
   - PaginationParams、PaginatedResponse、Result<T, E>、ApiErrorなどの共通型定義
   - Zodスキーマによるランタイムバリデーション用スキーマ定義
   - すべてのAPI レスポンス型の包括的な定義（カスタムフィールド含む）
   - _Requirements: 9.1, 9.2, 9.4_
 
-- [ ] 4.2 Redmine API Clientの実装
+- [x] 4.2 Redmine API Clientの実装
   - axiosインスタンス作成とX-Redmine-API-Keyヘッダーの自動付与（インターセプター）
   - HTTPS通信の強制、タイムアウト設定（30秒）
   - getProjects、getProject、searchIssues、createIssue、updateIssue、getUsers、getProjectMembersメソッド実装
@@ -76,21 +76,21 @@ Lychee Redmine MCP Serverの実装タスクです。TypeScript + Node.js 20+で�
   - APIキーの平文ログ出力禁止の徹底
   - _Requirements: 2.1, 2.2, 2.4, 2.5, 3.1, 3.2, 3.3, 3.4, 3.5, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 5.1, 5.2, 5.3_
 
-- [ ] 4.3 getScheduleメソッドの実装
+- [x] 4.3 getScheduleメソッドの実装
   - プロジェクトのIssuesとMilestonesを集約してSchedule型を構築
   - 最早開始日、最遅終了日、進捗率（加重平均）、依存関係情報の算出
   - クリティカルパス分析（オプション機能）
   - _Requirements: 6.1, 6.2, 6.3, 6.4_
 
 - [ ] 5. MCPツール実装
-- [ ] 5.1 (P) プロジェクト関連ツール（get_projects、get_project）の実装
+- [x] 5.1 (P) プロジェクト関連ツール（get_projects、get_project）の実装
   - Zodスキーマによるパラメータ定義（GetProjectsParamsSchema、GetProjectParamsSchema）
   - Redmine API ClientのgetProjectsとgetProjectを呼び出し
   - ページネーション対応、権限チェック、404エラーハンドリング
   - Result<T, E>型のMCPレスポンスへの変換
   - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 9.2, 9.3_
 
-- [ ] 5.2 (P) チケット関連ツール（search_issues、create_issue、update_issue）の実装
+- [x] 5.2 (P) チケット関連ツール（search_issues、create_issue、update_issue）の実装
   - SearchIssuesParamsSchema、CreateIssueParamsSchema、UpdateIssueParamsSchemaのZod定義
   - フィルタ条件（プロジェクト、ステータス、担当者、キーワード）による検索機能
   - チケット作成時の必須パラメータ（project_id、subject）バリデーション
