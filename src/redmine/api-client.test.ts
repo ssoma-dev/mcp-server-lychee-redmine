@@ -313,7 +313,7 @@ describe('RedmineAPIClient', () => {
 
       vi.mocked(mockAxiosInstance.get).mockResolvedValue(mockResponse);
 
-      const result = await client.getProjectMembers(1);
+      const result = await client.getProjectMembers({ project_id: 1 });
 
       expect(result.ok).toBe(true);
       if (result.ok) {

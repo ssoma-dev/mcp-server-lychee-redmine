@@ -1,6 +1,6 @@
 import axios, { type AxiosInstance, type AxiosError } from 'axios';
 import type { RetryHandler } from '../utils/retry-handler.js';
-import type { Logger } from '../utils/logger.js';
+import { logger as defaultLogger } from '../utils/logger.js';
 import {
   ProjectSchema,
   IssueSchema,
@@ -9,7 +9,6 @@ import {
   MilestonesResponseSchema,
   type Project,
   type Issue,
-  type Member,
   type MilestonesResponse,
   type Schedule,
   type GetProjectsParams,
@@ -20,9 +19,13 @@ import {
   type UpdateIssueParams,
   type GetUsersParams,
   type UsersResponse,
+  type GetProjectMembersParams,
+  type MembersResponse,
   type ApiError,
   type Result,
 } from './types.js';
+
+type LoggerType = typeof defaultLogger;
 
 /**
  * Redmine API Client設定
@@ -40,12 +43,12 @@ export interface RedmineAPIClientConfig {
 export class RedmineAPIClient {
   private readonly axios: AxiosInstance;
   private readonly retryHandler: RetryHandler;
-  private readonly logger?: Logger;
+  private readonly logger?: LoggerType;
 
   constructor(
     config: RedmineAPIClientConfig,
     retryHandler: RetryHandler,
-    logger?: Logger
+    logger?: LoggerType
   ) {
     // HTTPS強制（要件2.4）
     if (!config.url.startsWith('https://')) {
@@ -278,23 +281,19 @@ export class RedmineAPIClient {
    * プロジェクトメンバーを取得
    */
   async getProjectMembers(
-    projectId: number
-  ): Promise<
-    Result<
-      { data: Member[]; total_count: number; limit: number; offset: number },
-      ApiError
-    >
-  > {
+    params: GetProjectMembersParams
+  ): Promise<Result<MembersResponse, ApiError>> {
+    const { project_id, limit, offset } = params;
     return this.withRetry(async () => {
       const response = await this.axios.get<{
         memberships: unknown[];
         total_count: number;
         limit: number;
         offset: number;
-      }>(`/projects/${projectId}/memberships.json`, {
+      }>(`/projects/${project_id}/memberships.json`, {
         params: {
-          limit: 25,
-          offset: 0,
+          limit: limit ?? 25,
+          offset: offset ?? 0,
         },
       });
 
@@ -311,7 +310,7 @@ export class RedmineAPIClient {
           offset: response.data.offset,
         },
       };
-    }, `/projects/${projectId}/memberships.json`);
+    }, `/projects/${project_id}/memberships.json`);
   }
 
   /**
@@ -449,8 +448,11 @@ export class RedmineAPIClient {
         try {
           return await fn();
         } catch (error) {
-          // AxiosErrorをApiErrorに変換
-          throw this.convertToApiError(error, endpoint);
+          // AxiosErrorをApiErrorに変換してErrorとしてthrow
+          const apiError = this.convertToApiError(error, endpoint);
+          const err = new Error(apiError.message);
+          Object.assign(err, apiError);
+          throw err;
         }
       },
       {

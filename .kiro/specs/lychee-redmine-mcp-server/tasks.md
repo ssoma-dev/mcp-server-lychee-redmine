@@ -99,14 +99,14 @@ Lychee Redmine MCP Serverの実装タスクです。TypeScript + Node.js 20+で�
   - 409 Conflictエラーハンドリング
   - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 9.2, 9.3_
 
-- [ ] 5.3 (P) リソース管理ツール（get_users、get_project_members）の実装
+- [x] 5.3 (P) リソース管理ツール（get_users、get_project_members）の実装
   - GetUsersParamsSchema、GetProjectMembersParamsSchemaのZod定義
   - ユーザー情報（ID、名前、メール、ロール、ステータス）の取得
   - プロジェクトメンバーとロール情報の取得
   - ページネーション対応
   - _Requirements: 5.1, 5.2, 5.3, 9.2, 9.3_
 
-- [ ] 5.4 (P) スケジュール情報ツール（get_schedule）の実装
+- [x] 5.4 (P) スケジュール情報ツール（get_schedule）の実装
   - GetScheduleParamsSchemaのZod定義
   - Redmine API ClientのgetScheduleメソッドを呼び出し
   - スケジュール情報（開始日、終了日、進捗率、マイルストーン、依存関係）をJSON形式で返却
@@ -114,14 +114,14 @@ Lychee Redmine MCP Serverの実装タスクです。TypeScript + Node.js 20+で�
   - _Requirements: 6.1, 6.2, 6.3, 6.4, 9.2, 9.3_
 
 - [ ] 6. MCP Server Coreの実装
-- [ ] 6.1 ツールレジストリの実装
+- [x] 6.1 ツールレジストリの実装
   - Map<string, MCPToolDefinition>によるツール管理
   - ツール登録機能（重複チェック含む）
   - listTools、getToolメソッドの実装
   - ツール一覧取得（tools/list）とハンドラーマッピング
   - _Requirements: 12.1, 12.2, 12.3_
 
-- [ ] 6.2 MCPサーバー起動とプロトコル実装
+- [x] 6.2 MCPサーバー起動とプロトコル実装
   - @modelcontextprotocol/sdkのServerクラスとStdioServerTransportの使用
   - stdio経由でのJSON-RPC 2.0プロトコル実装
   - Config Loaderによる設定読み込みと起動時バリデーション
@@ -131,26 +131,26 @@ Lychee Redmine MCP Serverの実装タスクです。TypeScript + Node.js 20+で�
   - シャットダウン処理の実装
   - _Requirements: 1.1, 1.2, 1.5, 12.1, 12.2, 12.3, 12.4, 12.5_
 
-- [ ] 7. テスト実装
-- [ ] 7.1 (P) ユーティリティのユニットテスト
+- [x] 7. テスト実装
+- [x] 7.1 (P) ユーティリティのユニットテスト
   - Logger: ログレベル制御、センシティブデータマスキング、JSON形式出力検証
   - Error Handler: HTTPエラー変換、タイムスタンプ付与、エラーカテゴリ分類検証
   - Retry Handler: 指数バックオフロジック、リトライ回数制限、429エラーRetry-After対応検証
   - _Requirements: 11.1, 11.2_
 
-- [ ] 7.2 (P) 設定管理のユニットテスト
+- [x] 7.2 (P) 設定管理のユニットテスト
   - Environment Validator: 必須項目チェック、URLフォーマット、HTTPS検証、APIキー検証
   - Config Loader: 環境変数読み込み、デフォルト値適用、設定ファイルフォールバック、バリデーションエラー
   - _Requirements: 11.1, 11.2_
 
-- [ ] 7.3 (P) MCPツールのユニットテスト
+- [x] 7.3 (P) MCPツールのユニットテスト
   - すべてのツールのZodバリデーション検証
   - パラメータエラー時のToolError (type: 'validation') 変換
   - Result<T, E>型の正しい生成
   - モック化されたRedmine API Clientとの統合テスト
   - _Requirements: 11.1, 11.2, 11.4_
 
-- [ ] 7.4 Redmine API Clientのインテグレーションテスト
+- [x] 7.4 Redmine API Clientのインテグレーションテスト
   - モックサーバー（msw等）を使用したAPI呼び出しテスト
   - 認証ヘッダー（X-Redmine-API-Key）の検証
   - ページネーション処理の検証
@@ -158,28 +158,28 @@ Lychee Redmine MCP Serverの実装タスクです。TypeScript + Node.js 20+で�
   - リトライロジックの動作確認（5xxエラー、429エラー）
   - _Requirements: 11.2, 11.4_
 
-- [ ] 7.5 MCP Server統合テスト
+- [x] 7.5 MCP Server統合テスト
   - MCP Server起動、ツール登録、tools/listレスポンスの検証
   - クライアント→MCP Server→API Client→モックRedmine APIのEnd-to-Endフロー
   - 設定エラー時のプロセス終了動作確認
   - _Requirements: 11.2, 11.5_
 
-- [ ] 7.6* テストカバレッジ80%以上の達成確認
+- [x] 7.6* テストカバレッジ80%以上の達成確認
   - vitestカバレッジレポート生成
   - 全モジュールのカバレッジ確認
   - 未カバー箇所の追加テスト実装
   - CI/CDパイプラインでの自動テスト実行設定
   - _Requirements: 11.3, 11.5_
 
-- [ ] 8. 統合とデプロイ準備
-- [ ] 8.1 全コンポーネント統合とエンドツーエンド動作確認
+- [x] 8. 統合とデプロイ準備
+- [x] 8.1 全コンポーネント統合とエンドツーエンド動作確認
   - すべてのMCPツールがServer Core経由で呼び出し可能であることを確認
   - 実際のLychee Redmineインスタンスとの接続テスト（環境変数設定）
   - エラーハンドリング、リトライ、ログ出力の統合動作確認
   - パフォーマンス要件（p50 < 1s、p95 < 3s、p99 < 10s）の確認
   - _Requirements: 1.1, 1.2, 1.5, 2.1, 2.2, 2.4, 2.5, 2.6, 12.1, 12.2_
 
-- [ ] 8.2 ESLint/Prettier静的解析と型チェック
+- [x] 8.2 ESLint/Prettier静的解析と型チェック
   - TypeScript strict modeコンパイルエラーゼロ確認
   - ESLintルール違反ゼロ確認
   - Prettierフォーマット適用
