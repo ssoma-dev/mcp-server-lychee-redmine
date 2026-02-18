@@ -12,6 +12,7 @@
   },
   "scripts": {
     "dev": "tsx src/index.ts",
+    "prepare": "tsc",
     "build": "tsc",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
