@@ -23,6 +23,7 @@ export interface MCPToolDefinition {
     properties: Record<string, unknown>;
     required?: string[];
   };
+  handler?: (args: unknown) => Promise<unknown>;
 }
 
 /**
@@ -140,6 +141,7 @@ export class ProjectTools {
           properties: Record<string, unknown>;
           required?: string[];
         },
+        handler: (args) => this.getProjects(args),
       },
       {
         name: 'get_project',
@@ -150,6 +152,7 @@ export class ProjectTools {
           properties: Record<string, unknown>;
           required?: string[];
         },
+        handler: (args) => this.getProject(args),
       },
     ];
   }
