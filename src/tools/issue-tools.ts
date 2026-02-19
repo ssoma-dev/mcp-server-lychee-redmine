@@ -188,6 +188,7 @@ export class IssueTools {
           properties: Record<string, unknown>;
           required?: string[];
         },
+        handler: (args) => this.searchIssues(args),
       },
       {
         name: 'create_issue',
@@ -198,6 +199,7 @@ export class IssueTools {
           properties: Record<string, unknown>;
           required?: string[];
         },
+        handler: (args) => this.createIssue(args),
       },
       {
         name: 'update_issue',
@@ -208,6 +210,7 @@ export class IssueTools {
           properties: Record<string, unknown>;
           required?: string[];
         },
+        handler: (args) => this.updateIssue(args),
       },
     ];
   }

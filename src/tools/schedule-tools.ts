@@ -73,6 +73,7 @@ export class ScheduleTools {
           properties: Record<string, unknown>;
           required?: string[];
         },
+        handler: (args) => this.getSchedule(args),
       },
     ];
   }

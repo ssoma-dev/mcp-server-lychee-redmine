@@ -122,6 +122,7 @@ export class UserTools {
           properties: Record<string, unknown>;
           required?: string[];
         },
+        handler: (args) => this.getUsers(args),
       },
       {
         name: 'get_project_members',
@@ -132,6 +133,7 @@ export class UserTools {
           properties: Record<string, unknown>;
           required?: string[];
         },
+        handler: (args) => this.getProjectMembers(args),
       },
     ];
   }
